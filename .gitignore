@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 prostate/prostateList.txt
+prostate/prostateList.txt
+.httr-oauth
