@@ -1,5 +1,7 @@
 library(tidyverse)
-lung <- read_csv('lung/lung.csv', na = c("", "NA","Blank(s)"))
+# lung <- read_csv('lung/lung.csv', na = c("", "NA","Blank(s)"))
+# save(lung, file = 'lung/lung.rdata')
+load('lung/lung.rdata')
 
 long.names <- tolower(make.names(names(lung)))
 
@@ -16,7 +18,7 @@ short.names <- c('age','sex','location','hist',
                  'ajcc6_M','surg.primary','tsize','extent_clinical',
                  'nodes','mets','ext_eval','nodes_eval',
                   'mets_eval','tumor_nodule_ipsi','pleural_elastic','cod','seer_cs_death',
-                 'surv_mo','first_primary','race','status','yrdx','status_adj','no_int',
+                 'surv_mo','first_primary','status','yrdx','no_int',
                  'cum_exp', 'final_int_exp','final_int_year')
 
 
@@ -45,4 +47,6 @@ short.names <- c('age','sex','location','hist',
 
 
 names(lung) <- short.names
+
+
 
