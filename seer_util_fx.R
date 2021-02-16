@@ -31,20 +31,25 @@ expand_seer_cs_table <- function(table, upper, na.values, names = c('old','new')
      
      lookup2 <- data.frame(old = c(1:upper),
                            new = c(1:upper))
+     
      lookup3 <- rbind(lookup2, table)
      
-     res <- lookup3 %>% mutate(new = ifelse(new %in% na.values, NA, new))
+     res <- lookup3 %>% 
+         mutate(new = ifelse(new %in% na.values, NA, new),
+                old = as.numeric(old),
+                new = as.numeric(new))
      
      names(res) <- names
      
      res
+    
 }
 
-test1 <- data.frame(old = c(99,95,93, 8))
-lup <- data.frame(bif = c(93, 95, 99),
-                  new = c(3, 5, NA))
-
-translate_seer_numeric(test1, 90, lup)
-
-test1 %>% 
-     mutate(varb = translate_seer_numeric(var = old, 90, lup))
+# test1 <- data.frame(old = c(99,95,93, 8))
+# lup <- data.frame(bif = c(93, 95, 99),
+#                   new = c(3, 5, NA))
+# 
+# translate_seer_numeric(test1, 90, lup)
+# 
+# test1 %>% 
+#      mutate(varb = translate_seer_numeric(var = old, 90, lup))

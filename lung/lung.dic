@@ -1,6 +1,6 @@
 [System]
-Output filename=C:\Users\sjrig\Desktop\SEERProj\lung.csv
-Matrix filename=Survival Session-1 Matrix-4
+Output filename=C:\Users\sjrig\Documents\lung.csv
+Matrix filename=lung Matrix-1
 Database name=Incidence - SEER Research Data, 18 Registries, Nov 2019 Sub (2000-2017) - Linked To County Attributes - Time Dependent (1990-2017) Income/Rurality, 1969-2018 Counties
 
 [Session Options]
@@ -11,7 +11,7 @@ GZipped=false
 Variable format=labels
 File format=DOS/Windows
 Field delimiter=comma
-Missing character="NA"
+Missing character=space
 Fields with delimiter in quotes=true
 Remove thousands separators=true
 Variable names included=true
@@ -64,20 +64,22 @@ Var22Name=Survival months
 Var22DisplayType=Formatted
 Var23Name=First malignant primary indicator
 Var23DisplayType=Formatted
-Var24Name=Race and origin recode (NHW, NHB, NHAIAN, NHAPI, Hispanic)
+Var24Name=Regional nodes positive (1988+)
 Var24DisplayType=Formatted
-Var25Name=Vital status recode (study cutoff used)
+Var25Name=Race and origin recode (NHW, NHB, NHAIAN, NHAPI, Hispanic)
 Var25DisplayType=Formatted
-Var26Name=Year of diagnosis
+Var26Name=Vital status recode (study cutoff used)
 Var26DisplayType=Formatted
-Var27Name=End Calc Vital Status (Adjusted)
+Var27Name=Year of diagnosis
 Var27DisplayType=Formatted
-Var28Name=Number of Intervals (Calculated)
-Var28DisplayType=Unformatted
-Var29Name=Cumulative Expected (Calculated)
+Var28Name=End Calc Vital Status (Adjusted)
+Var28DisplayType=Formatted
+Var29Name=Number of Intervals (Calculated)
 Var29DisplayType=Unformatted
-Var30Name=Final Interval Expected (12 month)
+Var30Name=Cumulative Expected (Calculated)
 Var30DisplayType=Unformatted
-Var31Name=Final Interval Year (Calculated)
+Var31Name=Final Interval Expected (12 month)
 Var31DisplayType=Unformatted
+Var32Name=Final Interval Year (Calculated)
+Var32DisplayType=Unformatted
 
