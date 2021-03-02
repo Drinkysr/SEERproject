@@ -1,7 +1,7 @@
 library(tidyverse)
 # lung <- read_csv('lung.csv', na = c("", "NA","Blank(s)"))
 # save(lung, file = 'lung.rdata')
-load('lung.rdata')
+load('lung/lung.rdata')
 source('seer_util_fx.R')
 
 long.names <- tolower(make.names(names(lung)))
@@ -19,7 +19,8 @@ short.names <- c('age','sex','location','hist',
                  'ajcc6_M','surg.primary','tsize','extent_clinical',
                  'nodes','mets','ext_eval','nodes_eval',
                   'mets_eval','tumor_nodule_ipsi','pleural_elastic','cod','seer_cs_death',
-                 'surv_mo','first_primary','status','yrdx','no_int',
+                 'surv_mo','first_primary','regional_nodes_pos','race', 'status','yrdx',
+                  'status_adj', 'no_int',
                  'cum_exp', 'final_int_exp','final_int_year')
 
 
@@ -62,6 +63,7 @@ tsize_tab <- cs_lung %>%
             as.numeric(code) > 989)
 
 tsize_tab_exp <- expand_seer_cs_table(tsize_tab[,2:3], 989, c('unknown'), names = c('tsize','tsize.n'))
+lung$tsize <- as.numeric(lung$tsize)
 
 lung2 <- left_join(lung, tsize_tab_exp)
 
@@ -88,6 +90,8 @@ nodes_tab <- cs_lung %>%
      mutate(nodes = as.numeric(code),
             nodes.n = descr) %>% 
      select(nodes, nodes.n)
+
+lung$nodes <- as.numeric(lung$nodes)
 
 lung2 <- left_join(lung, nodes_tab)
 lung <- lung2 %>% 
