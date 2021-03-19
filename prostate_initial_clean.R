@@ -1,6 +1,7 @@
 ### initial prostate data clean
 library(tidyverse)
 library(janitor)
+source(file = 'seer_util_fx.R')
 
 ps <- read_csv('prostate/prostateList.txt', na = 'Blank(s)')
 
@@ -38,18 +39,26 @@ names(ps) <- simpnames
 
 ps <- remove_empty(ps, quiet = F)
 ## psa_interp, gleason_tert_removal, and core_bx_finding were all empty
-
+saveRDS(ps, file = 'prostate/prostate.rds') ##very much smaller
 ### get all the tables for lookup values
 cs <- read_csv('CSTables_scrape_updated - CSTables.csv', col_types = 'dcccccc') 
 
 cs_ps <- cs %>% 
      filter(cancer == "Prostate") %>% 
      select(short_table, code, descr)
+rm(cs)
 
 tsize_tab <- cs_ps %>% 
      filter(short_table == 'tsize',
-            as.numeric(code) > 989)
+            as.numeric(code) > 989)  %>% 
+     mutate(descr = as.numeric(descr),
+            code = as.numeric(code))
 
-tsize_tab_exp <- expand_seer_cs_table(tsize_tab[,2:3], 989, c('unknown'), names = c('tsize','tsize.n'))
+tsize_tab_exp <- expand_seer_cs_table(tsize_tab[,2:3], 989, na.values = c('unknown'), 
+                                      names = c('tsize','tsize.n'))
 
-ps2 <- left_join(ps, tsize_tab_exp)
+ps2 <- ps %>% 
+     mutate(tsize2 = translate_seer_numeric(as.numeric(tsize), tsize_tab_exp),
+            tsize3 = process_seer_numeric(as.numeric(tsize), tsize_tab[,2:3], 989, na.values = c('unknown'), 
+                                          names = c('tsize','tsize.n')))
+
